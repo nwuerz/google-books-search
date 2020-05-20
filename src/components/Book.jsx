@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { Button, Row, Col } from "react-bootstrap";
+import SearchContext from "../contexts/SearchContext";
 
 class Book extends Component {
+  static contextType = SearchContext;
+
   render() {
+    console.log(this.context)
     return (
       <div style={{ border: "solid 1px black", padding: "10px"}}>
         <Row>

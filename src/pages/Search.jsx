@@ -3,19 +3,18 @@ import { Container, Jumbotron } from "react-bootstrap";
 import Header from "../components/Header";
 import Input from "../components/Input";
 import Book from "../components/Book";
-import SearchContext from "../contexts/SearchContext";
 import API from "../components/utils/API";
 
 class Search extends Component {
   state = {
     search: "",
-    results: {},
+    results: [],
   };
 
   searchBooks = (query) => {
     API.search(query)
       .then((res) => {
-          this.setState({ results: res.data })
+          this.setState({ results: res.data.items })
           // console.log(this.state.results);
         })
       .catch((err) => console.log(err));
@@ -33,6 +32,7 @@ class Search extends Component {
   };
   
   render() {
+    console.log(this.state.results);
     return (
       <Container fluid>
         <Header />
@@ -42,9 +42,10 @@ class Search extends Component {
           />
         <Jumbotron>
           <h5>Results:</h5>
-          <SearchContext.Provider value={this.state.results}>
-          <Book />
-          </SearchContext.Provider>
+          {this.state.results.length > 0 ? this.state.results.map((result, index) =><Book 
+          key={`BOOK - ${index}`} 
+          result={result}
+          />) : <p>No Results</p>}
         </Jumbotron>
       </Container>
     );

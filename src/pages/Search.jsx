@@ -9,6 +9,7 @@ class Search extends Component {
   state = {
     search: "",
     results: [],
+    button: "Save"
   };
 
   searchBooks = (query) => {
@@ -45,6 +46,7 @@ class Search extends Component {
           {this.state.results.length > 0 ? this.state.results.map((result, index) =><Book 
           key={`BOOK - ${index}`} 
           result={result}
+          button={this.state.button}
           />) : <p>No Results</p>}
         </Jumbotron>
       </Container>

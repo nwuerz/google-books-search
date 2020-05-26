@@ -1,7 +1,7 @@
 const express = require("express");
-
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const morgan = require('morgan');
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -11,6 +11,9 @@ app.use(express.json());
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
+}
+else {
+  app.use(morgan('dev'));
 }
 
 // Add routes, both API and view

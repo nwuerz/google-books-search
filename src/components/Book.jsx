@@ -17,13 +17,12 @@ const Book = (props) => {
     return "no description";
   };
 
-  const handleClick = (evt)=> {
-    evt.preventDefault();
+  const handleClick = ()=> {
     API.saveBook({
-      title: {title},
-      author: {authors},
-      image: {imageLinks},
-      description: {getDescriptionText}
+      title: title,
+      author: authors.join(", "),
+      images: imageLinks,
+      description: getDescriptionText()
     })
     .then(res => console.log(res))
     .catch(err => console.log(err));
@@ -38,7 +37,7 @@ const Book = (props) => {
         </Col>
         <Col md="3">
           <Button style={{ marginRight: "20px" }}>View</Button>
-          <Button onClick = {handleClick}>{props.button}</Button>
+          <Button onClick ={handleClick}>{props.button}</Button>
         </Col>
       </Row>
       <Row>
